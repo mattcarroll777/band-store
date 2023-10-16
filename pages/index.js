@@ -17,7 +17,9 @@ export default function Home({ allProductsData }) {
   const currentProds = allProductsData.slice(indexOfFirstProd, indexOfLastProd);
 
   const pageUp = () => {
-    setPageNum(pageNum + 1);
+    if (pageNum * prodPerPage < allProductsData.length) {
+      setPageNum(pageNum + 1);
+    }
   };
   const pageDown = () => {
     if (pageNum > 1) {
@@ -71,12 +73,12 @@ export default function Home({ allProductsData }) {
 
 export async function getStaticProps() {
   const allProductsData = getSortedProductsData();
-  const pageNums = [0, 2];
+  // const pageNums = [0, 2];
 
   return {
     props: {
       allProductsData,
-      pageNums,
+      // pageNums,
     },
   };
 }
