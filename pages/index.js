@@ -13,8 +13,17 @@ export default function Home({ allProductsData }) {
 
   const indexOfLastProd = pageNum * prodPerPage;
   const indexOfFirstProd = indexOfLastProd - prodPerPage;
+
   const currentProds = allProductsData.slice(indexOfFirstProd, indexOfLastProd);
 
+  const pageUp = () => {
+    setPageNum(pageNum + 1);
+  };
+  const pageDown = () => {
+    if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
+  };
   return (
     <Layout home>
       <Head>
@@ -25,10 +34,19 @@ export default function Home({ allProductsData }) {
         <div className={utilStyles.optionCont}>
           <div id={utilStyles.pageNum}>
             Page Num {pageNum}
-            <button> Up </button>
-            <button> Down </button>
+            <button onClick={pageUp}> Up </button>
+            <button onClick={pageDown}> Down </button>
           </div>
           <div id={utilStyles.prodsPer}>Products per Page {prodPerPage}</div>
+          <select
+            name="prodsPerPage"
+            value={prodPerPage}
+            onChange={(e) => setProdPerPage(e.target.value)}
+          >
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+          </select>
         </div>
         <ul className={utilStyles.list}>
           {currentProds.map(({ id, price, title, image }) => (
