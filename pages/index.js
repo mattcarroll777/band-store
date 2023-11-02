@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
+import styles from './index.module.css';
 import { getSortedProductsData } from '../lib/products';
 import Link from 'next/link';
 import Date from '../components/date';
@@ -50,13 +51,13 @@ export default function Home({ allProductsData }) {
             <option value="10">10</option>
           </select>
         </div>
-        <ul className={utilStyles.list}>
+        <ul className={styles.productList}>
           {currentProds.map(({ id, price, title, image }) => (
-            <li className={utilStyles.listItem} key={id}>
+            <li className={styles.listItem} key={id}>
               <Image
                 priority
                 src={image}
-                className={utilStyles.borderCircle}
+                className={styles.productImg}
                 height={144}
                 width={144}
               />
